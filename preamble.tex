@@ -1,0 +1,195 @@
+% ===== 基本设置 =====
+\usetheme[progressbar=frametitle]{moloch} % Beamer 主题
+% \usetheme[progressbar=frametitle]{metropolis} % 如果需要使用 metropolis 主题
+
+% ===== Beamer 主题个性化 =====
+\setbeamercolor*{palette primary}{fg=Black, bg=LightGray}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{blocks}[rounded] % 圆角方块
+\setbeamercolor{background canvas}{bg=White}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=BrickRed}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamercolor{example text}{fg=ForestGreen}
+\setbeamercolor{block title alerted}{bg=Maroon!30, fg=black}
+\setbeamercolor{block body alerted}{bg=red!10, fg=black}
+% \addtobeamertemplate{frametitle}{}{\vspace{-0.8cm}}
+
+% 自定义分页标记为 (当前页/总页数)
+\newcounter{cont}
+\makeatletter
+\setbeamertemplate{frametitle continuation}{%
+    \setcounter{cont}{\beamer@endpageofframe}%
+    \addtocounter{cont}{1}%
+    \addtocounter{cont}{-\beamer@startpageofframe}%
+    \footnotesize{(\insertcontinuationcount/\arabic{cont})}%
+}% end frame title continuation
+\makeatother
+
+% 添加 Logo 到 frametitle
+\addtobeamertemplate{frametitle}{}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north east, xshift=-2mm, yshift=-0.5mm] at (current page.north east) {
+            \includegraphics[height=1cm]{logo/upc-logo.pdf}
+        };
+    \end{tikzpicture}
+}
+
+\setbeamerfont{footnote}{size=\tiny} % 调整脚注字体大小
+\setbeamertemplate{footnote}{\insertfootnotetext} % 设置脚注模板
+% \setbeamerfont{notes}{size=\tiny}
+
+
+% ===== 字体设置 =====
+\usepackage{fontspec} % 启用 OpenType 字体
+\usepackage{xeCJK} % 支持 CJK 字体
+
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{JetBrains Mono}
+
+\setCJKmainfont[
+    ItalicFont=Source Han Mono SC Italic,
+    BoldFont=Source Han Serif SC Bold
+]{Source Han Serif SC} % CJK 主字体（宋体）
+\setCJKsansfont[
+    ItalicFont=Source Han Mono SC Italic,
+    BoldFont=Source Han Sans CN Bold
+]{Source Han Sans CN} % CJK 无衬线字体（黑体）
+\setCJKmonofont[
+    ItalicFont=Source Han Mono SC Italic,
+    BoldFont=Source Han Mono SC Bold
+]{Source Han Mono SC} % CJK 等宽字体
+
+\usefonttheme{serif}
+\setbeamerfont{frametitle}{family=\sffamily}
+\setbeamerfont{normal text}{family=\rmfamily}
+
+\usepackage{fontawesome} % 用于引入图标
+
+% ===== 颜色定义 =====
+\usepackage[dvipsnames]{xcolor} % 扩展颜色支持
+\definecolor{LightGray}{HTML}{f5f5f5} % 浅灰色
+\definecolor{MyMaroon}{RGB}{128,0,0} % 自定义栗色
+\definecolor{myblue}{RGB}{164,160,255}
+
+% ===== 强调和脚注设置 =====
+\renewcommand{\emph}[1]{\textbf{\sffamily\textcolor{Maroon}{#1}}} % 强调文本为Sans字体
+% \renewcommand{\footnotesize}{\tiny} % 脚注文本尺寸
+
+% ===== 数学和代码高亮设置 =====
+\usepackage{amsmath, amsfonts, mathtools, amssymb} % 数学包
+\usepackage[newfloat]{minted} % 代码高亮，需要启用 shell-escape，即使这样，有的minted环境无法正常工作（比如\only{text}），需要使用 \texttt{} 或者 \verb{} 环境。注意，使用listings包，也会出现类似的问题。
+
+% Minted 设置：代码框与高亮配置
+\setminted{
+    linenos,
+    xleftmargin=2em,
+    autogobble=true,
+    numbers=left,
+    numbersep=1em,
+    baselinestretch=1.2,
+    breaklines=true,
+    frame=lines,
+    fontsize=\footnotesize,
+    highlightcolor=OliveGreen!10,
+}
+% mintinline的字体设置，使其与正文字号保持一致
+\usepackage{inputenc}
+\makeatletter
+\newcommand{\currentfontsize}{\fontsize{\f@size}{\f@baselineskip}\selectfont}
+\makeatother
+\setmintedinline{fontsize=\currentfontsize}
+
+\usemintedstyle[python]{xcode} % 设置默认 Python 风格
+\renewcommand{\theFancyVerbLine}{\ttfamily\textcolor{Gray}{\scriptsize{\arabic{FancyVerbLine}}}}
+\SetupFloatingEnvironment{listing}{name=Pseudo Code}
+
+% ===== 图片与绘图支持 =====
+\usepackage{graphicx}
+\graphicspath{{img/}} % 设置图片路径
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, positioning, shadows, chains, arrows, shapes.multipart, matrix, calc}
+
+% ===== 算法、图表、表格支持 =====
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{clrscode3e} % 伪代码支持
+\usepackage[
+    linesnumbered,
+    % ruled,
+    % vlined
+]{algorithm2e} % 算法包
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} % 确保 pgfplots 兼容性
+\usepackage{array, booktabs} % 表格支持
+\usepackage{longtable} % 长表格支持
+\usepackage[skins,xparse,breakable]{tcolorbox} % 彩色盒子
+% 定义 tcolorbox 环境的样式
+% \tcbuselibrary{listingsutf8}
+\tcbset{
+    colback=MidnightBlue!5!white,
+    colframe=MidnightBlue!75!BrickRed
+}
+\usepackage{ragged2e} % 灵活的段落对齐
+
+% ===== 超链接设置 =====
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=NavyBlue,
+    urlcolor=NavyBlue
+}
+
+% ===== Beamer 笔记设置 =====
+% 为了能在dual screen模式下显示Beamer笔记，需要在导言区设置以下命令，且需要使用pympress软件打开PDF文件
+% \setbeameroption{hide notes} % Only slides
+% \setbeameroption{show only notes} % Only notes
+% \setbeameroption{show notes on second screen=right} % Both
+% \setbeameroption{show notes on second screen=bottom} % Both
+
+% 以下命令用于设置 Beamer 笔记的字体和颜色，解决当选择显示笔记时，正文部分文字不显示的问题
+\makeatletter
+\def\beamer@framenotesbegin{% at beginning of slide
+    \usebeamercolor[fg]{normal text} % 设置正常文本的颜色
+    \gdef\beamer@noteitems{}% % 初始化备注项目
+    \gdef\beamer@notes{}% % 初始化备注内容
+}
+\makeatother
+
+% ===== 其他设置 =====
+\usepackage{setspace} % 设置行距
+% \SetupFloatingEnvironment{listing}{name=代码}
+\SetupFloatingEnvironment{figure}{name=图}
+\SetupFloatingEnvironment{table}{name=表}
+\usepackage{multirow}
+\usepackage{multicol} % 添加 multicol 包，用于实现多栏排版、
+
+% 在导言区添加此项，解决 hyperref 时的警告
+% Package hyperref: Token not allowed in a PDF string (Unicode):
+% (hyperref)	removing `\translate '.
+\pdfstringdefDisableCommands{%
+    \def\translate#1{#1}%
+    \def\LARGE#1{#1}%
+    \def\textbf#1{#1}%
+    \def\texttt#1{#1}%
+}
+
+% ===== 自定义命令 =====
+
+% \usepackage{fontawesome}      % 用于引入图标
+
+% ===== block examples =====
+% \begin{block}{Default}
+%     Block content.
+% \end{block}
+
+% \begin{alertblock}{Alert}
+%     Block content.
+% \end{alertblock}
+
+% \begin{exampleblock}{Example}
+%     Block content.
+% \end{exampleblock}

@@ -1,0 +1,136 @@
+{
+    // General
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on",
+    // "editor.fontFamily": "'JetBrains Mono'",
+    "editor.lineHeight": 1.5,
+    "files.trimFinalNewlines": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "*.aux": true,
+        "*.bbl": true,
+        "*.blg": true,
+        "*.idx": true,
+        "*.ind": true,
+        "*.lof": true,
+        "*.lot": true,
+        "*.out": true,
+        "*.toc": true,
+        "*.acn": true,
+        "*.acr": true,
+        "*.alg": true,
+        "*.glg": true,
+        "*.glo": true,
+        "*.gls": true,
+        "*.fls": true,
+        "*.log": true,
+        "*.fdb_latexmk": true,
+        "*.snm": true,
+        "*.synctex(busy)": true,
+        "*.synctex.gz(busy)": true,
+        "*.nav": true,
+        "*.xdv": true,
+        "*.vrb": true,
+        "_minted-*/**": true,
+        "_minted-*/": true,
+        "0": true,
+    },
+
+    // Python
+    "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.formatOnType": true,
+        "editor.wordBasedSuggestions": "off",
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+
+    // Latex
+    // LaTeX formatting using latexindent
+    "latex-workshop.formatting.latex": "latexindent",
+
+    // PDF viewer set to open in sumtraPDF
+    "latex-workshop.view.pdf.viewer": "tab",
+    // "latex-workshop.view.pdf.viewer": "external",
+
+    // "latex-workshop.view.pdf.external.viewer.command": "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe",
+    // "latex-workshop.view.pdf.external.synctex.command": "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe",
+    // "latex-workshop.view.pdf.external.viewer.args": [
+    //     "%PDF%",
+    //     "-forward-search",
+    //     "%LINE%",
+    //     "%TEX%",
+    //     "-reuse-instance",
+    //     "-inverse-search",
+    //     "\"C:\\Program Files\\Microsoft VS Code\\Code.exe\" -r -g \"%f:%l\""
+    // ],
+    // Enable syncTeX for easy navigation between PDF and LaTeX source
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+
+    // Define LaTeX compilation recipes
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk (xelatex with shell-escape)",
+            "tools": ["latexmk_xelatex_shell_escape"]
+        }
+    ],
+
+    // Define LaTeX tools for various recipes
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk_xelatex_shell_escape",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-xelatex",
+                "-shell-escape",
+                "%DOC%"
+            ]
+        }
+    ],
+
+    // Set default recipe for LaTeX compilation
+    "latex-workshop.latex.recipe.default": "latexmk (xelatex with shell-escape)",
+
+    // Configure file cleaning behavior
+    "latex-workshop.latex.clean.method": "glob",
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk",
+        "*.snm",
+        "*.synctex(busy)",
+        "*.synctex.gz(busy)",
+        "*.nav",
+        "*.xdv",
+        "*.vrb",
+        "_minted-*/**",
+        "_minted-*/",
+        "0",
+        "ch/*.aux"
+    ],
+
+    // Auto clean auxiliary files after each build
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+}
